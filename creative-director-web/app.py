@@ -54,29 +54,71 @@ if prompt := st.chat_input("Submit your campaign brief..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
 
     with st.chat_message("assistant"):
-        def stream_agent_response():
+        try:
+            status_container = st.status("🎨 Orchestrating specialists...", expanded=True)
+            text_chunks = []
+
             response_stream = agent.stream_query(
                 user_id=st.session_state.user_uuid,
                 session_id=st.session_state.agent_session_id,
                 message=prompt,
             )
-            for event in response_stream:
-                if isinstance(event, str):
-                    yield event
-                elif isinstance(event, dict):
-                    # Handle text chunks in parts
-                    parts = event.get("content", {}).get("parts", []) if isinstance(event.get("content"), dict) else []
-                    for part in parts:
-                        if isinstance(part, dict) and "text" in part:
-                            yield part["text"]
-                    if not parts:
-                        text = event.get("text") or event.get("output") or event.get("response")
-                        if isinstance(text, str):
-                            yield text
 
-        try:
-            full_response = st.write_stream(stream_agent_response)
-            st.session_state.messages.append({"role": "assistant", "content": full_response})
+            placeholder = st.empty()
+
+            for event in response_stream:
+                # 1. Plain string event
+                if isinstance(event, str):
+                    text_chunks.append(event)
+                    placeholder.markdown("".join(text_chunks))
+                    continue
+
+                # 2. Extract content & parts (supports dict or object attributes)
+                content = event.get("content", {}) if isinstance(event, dict) else getattr(event, "content", None)
+                parts = []
+                if isinstance(content, dict):
+                    parts = content.get("parts", [])
+                elif hasattr(content, "parts"):
+                    parts = content.parts
+
+                for part in parts:
+                    part_text = None
+                    func_call = None
+
+                    if isinstance(part, dict):
+                        part_text = part.get("text")
+                        func_call = part.get("function_call")
+                    else:
+                        part_text = getattr(part, "text", None)
+                        func_call = getattr(part, "function_call", None)
+
+                    if func_call:
+                        func_name = func_call.get("name") if isinstance(func_call, dict) else getattr(func_call, "name", "specialist")
+                        status_container.write(f"🤖 Calling specialist: **{func_name}**...")
+                    elif part_text:
+                        text_chunks.append(part_text)
+                        placeholder.markdown("".join(text_chunks))
+
+                # 3. Fallback extraction if no parts
+                if not parts:
+                    fallback_text = None
+                    if isinstance(event, dict):
+                        fallback_text = event.get("text") or event.get("output") or event.get("response")
+                    else:
+                        fallback_text = getattr(event, "text", None) or getattr(event, "output", None)
+
+                    if isinstance(fallback_text, str) and fallback_text:
+                        text_chunks.append(fallback_text)
+                        placeholder.markdown("".join(text_chunks))
+
+            full_response = "".join(text_chunks)
+            if full_response:
+                status_container.update(label="✓ Campaign orchestration complete!", state="complete", expanded=False)
+                st.session_state.messages.append({"role": "assistant", "content": full_response})
+            else:
+                status_container.update(label="⚠️ Orchestrator completed with no direct text response.", state="error", expanded=True)
+                st.warning("No text was extracted from the response stream. Check the backend logs for details.")
+
         except Exception as e:
             st.error(f"Execution Error: {e}")
 
