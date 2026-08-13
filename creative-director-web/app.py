@@ -1,12 +1,13 @@
+import os
+import uuid
 import streamlit as st
 import vertexai
-import uuid
-from vertexai.preview import reasoning_engines
+from vertexai import agent_engines
 
 # --- 1. Configuration ---
-PROJECT_ID = "ssd-instagram-campaign"
-LOCATION = "us-central1"
-REASONING_ENGINE_ID = "8797123814359040000"
+PROJECT_ID = os.getenv("GOOGLE_CLOUD_PROJECT", "ssd-instagram-campaign")
+LOCATION = os.getenv("CLOUD_RUN_REGION", os.getenv("LOCATION", "us-central1"))
+REASONING_ENGINE_ID = os.getenv("AGENT_ENGINE_ID", "8797123814359040000")
 
 vertexai.init(project=PROJECT_ID, location=LOCATION)
 
@@ -16,7 +17,7 @@ st.set_page_config(page_title="Creative Director", page_icon="🎨", layout="wid
 @st.cache_resource
 def get_remote_agent():
     resource_name = f"projects/{PROJECT_ID}/locations/{LOCATION}/reasoningEngines/{REASONING_ENGINE_ID}"
-    return reasoning_engines.ReasoningEngine(resource_name)
+    return agent_engines.get(resource_name)
 
 agent = get_remote_agent()
 
