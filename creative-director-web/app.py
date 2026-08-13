@@ -7,7 +7,7 @@ from vertexai import agent_engines
 # --- 1. Configuration ---
 PROJECT_ID = os.getenv("GOOGLE_CLOUD_PROJECT", "ssd-instagram-campaign")
 LOCATION = os.getenv("CLOUD_RUN_REGION", os.getenv("LOCATION", "us-central1"))
-REASONING_ENGINE_ID = os.getenv("AGENT_ENGINE_ID", "8797123814359040000")
+REASONING_ENGINE_ID = os.getenv("AGENT_ENGINE_ID", "2618396231839252480")
 
 vertexai.init(project=PROJECT_ID, location=LOCATION)
 
