@@ -45,9 +45,13 @@ if "agent_session_id" not in st.session_state:
 st.title("🎨 Creative Director Orchestrator")
 st.caption(f"Session: `{st.session_state.agent_session_id}` | User: `{st.session_state.user_uuid}`")
 
+# Render historical messages
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
-        st.markdown(message["content"])
+        if message.get("is_image"):
+            st.image(message["content"], caption=message.get("caption", "Generated Asset"))
+        else:
+            st.markdown(message["content"])
 
 if prompt := st.chat_input("Submit your campaign brief..."):
     st.chat_message("user").markdown(prompt)
@@ -57,6 +61,7 @@ if prompt := st.chat_input("Submit your campaign brief..."):
         try:
             status_container = st.status("🎨 Orchestrating specialists...", expanded=True)
             text_chunks = []
+            image_parts_captured = []  # Temporarily store images found during stream
 
             response_stream = agent.stream_query(
                 user_id=st.session_state.user_uuid,
@@ -84,20 +89,54 @@ if prompt := st.chat_input("Submit your campaign brief..."):
                 for part in parts:
                     part_text = None
                     func_call = None
+                    inline_data = None
+                    file_data = None
 
+                    # Extract all possible modalities
                     if isinstance(part, dict):
                         part_text = part.get("text")
                         func_call = part.get("function_call")
+                        inline_data = part.get("inline_data")
+                        file_data = part.get("file_data")
                     else:
                         part_text = getattr(part, "text", None)
                         func_call = getattr(part, "function_call", None)
+                        inline_data = getattr(part, "inline_data", None)
+                        file_data = getattr(part, "file_data", None)
 
                     if func_call:
                         func_name = func_call.get("name") if isinstance(func_call, dict) else getattr(func_call, "name", "specialist")
                         status_container.write(f"🤖 Calling specialist: **{func_name}**...")
+                    
                     elif part_text:
                         text_chunks.append(part_text)
                         placeholder.markdown("".join(text_chunks))
+                    
+                    # Handle raw base64 inline images
+                    elif inline_data:
+                        mime_type = inline_data.get("mime_type") if isinstance(inline_data, dict) else getattr(inline_data, "mime_type", None)
+                        data = inline_data.get("data") if isinstance(inline_data, dict) else getattr(inline_data, "data", None)
+                        if mime_type and mime_type.startswith("image/"):
+                            st.image(data, caption="Generated Asset")
+                            image_parts_captured.append({
+                                "role": "assistant",
+                                "content": data,
+                                "is_image": True,
+                                "caption": "Generated Asset"
+                            })
+                    
+                    # Handle Cloud Storage (gs://) or external URI images
+                    elif file_data:
+                        file_uri = file_data.get("file_uri") if isinstance(file_data, dict) else getattr(file_data, "file_uri", None)
+                        mime_type = file_data.get("mime_type") if isinstance(file_data, dict) else getattr(file_data, "mime_type", None)
+                        if mime_type and mime_type.startswith("image/"):
+                            st.image(file_uri, caption="Generated Asset (GCS)")
+                            image_parts_captured.append({
+                                "role": "assistant",
+                                "content": file_uri,
+                                "is_image": True,
+                                "caption": "Generated Asset (GCS)"
+                            })
 
                 # 3. Fallback extraction if no parts
                 if not parts:
@@ -112,12 +151,19 @@ if prompt := st.chat_input("Submit your campaign brief..."):
                         placeholder.markdown("".join(text_chunks))
 
             full_response = "".join(text_chunks)
-            if full_response:
+            if full_response or image_parts_captured:
                 status_container.update(label="✓ Campaign orchestration complete!", state="complete", expanded=False)
-                st.session_state.messages.append({"role": "assistant", "content": full_response})
+                
+                # Persist text response
+                if full_response:
+                    st.session_state.messages.append({"role": "assistant", "content": full_response})
+                
+                # Persist image responses
+                for img_msg in image_parts_captured:
+                    st.session_state.messages.append(img_msg)
             else:
-                status_container.update(label="⚠️ Orchestrator completed with no direct text response.", state="error", expanded=True)
-                st.warning("No text was extracted from the response stream. Check the backend logs for details.")
+                status_container.update(label="⚠️ Orchestrator completed with no direct response.", state="error", expanded=True)
+                st.warning("No text or media was extracted from the response stream.")
 
         except Exception as e:
             st.error(f"Execution Error: {e}")
