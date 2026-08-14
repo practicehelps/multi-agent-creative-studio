@@ -111,10 +111,11 @@ This repository is deliberately a teaching scaffold, not a turnkey product. By d
 
 - A finished, runnable agent implementation. The files in `workshop/starter/agents/` contain guided `# TODO` markers; the deploy scripts and infrastructure are complete, but the agent logic is what you write by following the codelab.
 - A CI pipeline or automated test suite (hence no build or coverage badges).
-- A web frontend of its own. You interact through ADK's dev UI, the deployed Agent Engine, or `run_campaign.py`.
 - A persistence layer beyond Cloud Storage for images and optional Notion for tasks.
 
 ## Demo and Screenshots
+
+- A web front end (streamlit) has been added, to the original implementation. It is under creative-director-web directory. We can run the prompts over here: https://creative-director-web-622676722764.us-central1.run.app
 
 A full campaign generated end-to-end in the ADK dev UI:
 
