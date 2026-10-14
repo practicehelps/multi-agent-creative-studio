@@ -19,6 +19,8 @@ Deploy all 5 specialist agents to Cloud Run and collect their URLs
 Supports parallel deployment for faster execution
 """
 
+from __future__ import annotations
+
 import asyncio
 import os
 import sys

@@ -18,6 +18,8 @@ Environment utilities for multi-agent deployment
 Provides shared functions for loading, validating, and formatting environment variables
 """
 
+from __future__ import annotations
+
 import os
 from pathlib import Path
 

@@ -1,0 +1,70 @@
+- generic [ref=e2]:
+  - button [ref=e14] [cursor=pointer]:
+    - paragraph [ref=e18]: New Campaign
+  - generic [ref=e3]:
+    - banner [ref=e21]:
+      - generic [ref=e24]:
+        - generic [ref=e190]:
+          - img "Running..." [ref=e191]
+          - button "Stop" [ref=e196] [cursor=pointer]
+        - button "Main menu" [ref=e26] [cursor=pointer]
+    - generic [ref=e30]:
+      - generic [ref=e32]:
+        - heading "🎨 Creative Director Orchestrator" [level=1] [ref=e37]:
+          - text: 🎨 Creative Director Orchestrator
+          - generic [ref=e38]:
+            - link "Link to heading":
+              - /url: "#creative-director-orchestrator"
+        - paragraph [ref=e43]:
+          - text: "Session:"
+          - code [ref=e44]: "5945282744043962368"
+          - text: "| User:"
+          - code [ref=e45]: a9d7302d-a35c-481b-82b6-830a69317f9a
+        - generic [ref=e198]:
+          - generic [ref=e199]: face
+          - generic "Chat message from user" [ref=e202]:
+            - paragraph [ref=e208]: create a campaign to promote fitbit air, for healthy lifestyle
+        - generic [ref=e210]:
+          - generic [ref=e211]: smart_toy
+          - generic "Chat message from assistant" [ref=e214]:
+            - generic [ref=e215]:
+              - group [ref=e218]:
+                - paragraph [ref=e225] [cursor=pointer]: 🎨 Orchestrating specialists...
+                - generic [ref=e230]:
+                  - paragraph [ref=e235]:
+                    - text: "🤖 Calling specialist:"
+                    - strong [ref=e236]: brand_strategist
+                    - text: ...
+                  - paragraph [ref=e264]:
+                    - text: "🤖 Calling specialist:"
+                    - strong [ref=e265]: copywriter
+                    - text: ...
+              - generic [ref=e240]:
+                - paragraph [ref=e241]:
+                  - text: I will coordinate our team to create a comprehensive campaign for the
+                  - strong [ref=e242]: Fitbit Air
+                  - text: ", focusing on promoting a healthy lifestyle. Here is my execution plan:"
+                - list [ref=e243]:
+                  - listitem [ref=e244]:
+                    - strong [ref=e245]: Brand Strategist
+                    - text: will research the market, competitors, and target audience for the Fitbit Air, identifying key trends and positioning.
+                  - listitem [ref=e246]:
+                    - strong [ref=e247]: Copywriter
+                    - text: will create 3 engaging Instagram posts using those strategic insights.
+                  - listitem [ref=e248]:
+                    - strong [ref=e249]: Designer
+                    - text: will generate visual concepts and real images for each post.
+                  - listitem [ref=e250]:
+                    - strong [ref=e251]: Critic
+                    - text: will review all creative work for quality and provide structured feedback.
+                  - listitem [ref=e252]:
+                    - strong [ref=e253]: Revision Round
+                    - text: (if any deliverables need revision based on the Critic's feedback, we will address them immediately).
+                  - listitem [ref=e254]:
+                    - strong [ref=e255]: Project Manager
+                    - text: will create the project timeline and deliverables.
+                - paragraph [ref=e256]: Let's begin with the market research! I am calling the Brand Strategist now.✓ Research complete. I received detailed insights on the target audience (focusing on "Soft Wellness", "Slow Tech", and "Micro-habit Seekers"), competitive analysis (WHOOP, Oura, Garmin), and key trends (Digital Detox, Mental Fitness, AI Health Coaching).
+                - paragraph [ref=e266]: Now moving to copywriting to create 3 Instagram posts using these insights. I am calling the Copywriter now.
+      - generic [ref=e54]:
+        - textbox "Submit your campaign brief..." [active] [ref=e56]
+        - button "Send message" [disabled] [ref=e58]

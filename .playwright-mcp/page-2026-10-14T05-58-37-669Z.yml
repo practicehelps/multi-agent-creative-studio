@@ -1,0 +1,75 @@
+- generic [ref=e2]:
+  - button [ref=e14] [cursor=pointer]:
+    - paragraph [ref=e18]: New Campaign
+  - generic [ref=e3]:
+    - banner [ref=e21]:
+      - generic [ref=e24]:
+        - generic [ref=e178]:
+          - img "Running..." [ref=e179]
+          - button "Stop" [ref=e185] [cursor=pointer]
+        - button "Main menu" [ref=e26] [cursor=pointer]
+    - generic [ref=e30]:
+      - generic [ref=e32]:
+        - heading "🎨 Creative Director Orchestrator" [level=1] [ref=e37]:
+          - text: 🎨 Creative Director Orchestrator
+          - generic [ref=e38]:
+            - link "Link to heading":
+              - /url: "#creative-director-orchestrator"
+        - paragraph [ref=e43]:
+          - text: "Session:"
+          - code [ref=e44]: "8324590722179137536"
+          - text: "| User:"
+          - code [ref=e45]: 7325f521-1b24-4d43-8de1-0815c27cce8e
+        - generic [ref=e71]:
+          - generic [ref=e72]: face
+          - generic "Chat message from user" [ref=e75]:
+            - paragraph [ref=e81]: Create a campaign to promote fitbit air
+        - generic [ref=e83]:
+          - generic [ref=e84]: smart_toy
+          - generic "Chat message from assistant" [ref=e87]:
+            - generic [ref=e88]:
+              - group [ref=e91]:
+                - paragraph [ref=e98] [cursor=pointer]: 🎨 Orchestrating specialists...
+                - generic [ref=e103]:
+                  - paragraph [ref=e108]:
+                    - text: "🤖 Calling specialist:"
+                    - strong [ref=e109]: brand_strategist
+                    - text: ...
+                  - paragraph [ref=e141]:
+                    - text: "🤖 Calling specialist:"
+                    - strong [ref=e142]: copywriter
+                    - text: ...
+                  - paragraph [ref=e151]:
+                    - text: "🤖 Calling specialist:"
+                    - strong [ref=e152]: designer
+                    - text: ...
+              - generic [ref=e113]:
+                - paragraph [ref=e114]:
+                  - text: I'll coordinate our team to create a comprehensive social media campaign for the
+                  - strong [ref=e115]: Fitbit Air
+                  - text: ". Here is my execution plan:"
+                - list [ref=e116]:
+                  - listitem [ref=e117]:
+                    - strong [ref=e118]: Brand Strategist
+                    - text: will research the market, define the positioning for "Fitbit Air" (focusing on its likely positioning as an ultra-lightweight, breathable, wellness-focused wearable), analyze competitors, and identify key trends.
+                  - listitem [ref=e119]:
+                    - strong [ref=e120]: Copywriter
+                    - text: will draft 3 engaging Instagram posts with captions, hashtags, and strong CTAs based on those strategic insights.
+                  - listitem [ref=e121]:
+                    - strong [ref=e122]: Designer
+                    - text: will generate visual concepts and real images for each post.
+                  - listitem [ref=e123]:
+                    - strong [ref=e124]: Critic
+                    - text: will review the copy and visuals, providing structured feedback and quality scores.
+                  - listitem [ref=e125]:
+                    - strong [ref=e126]: Revision Round (if needed)
+                    - text: ": If any deliverables need improvement, I will coordinate with the Copywriter or Designer to revise them."
+                  - listitem [ref=e127]:
+                    - strong [ref=e128]: Project Manager
+                    - text: will compile the final assets and create a detailed project timeline and task breakdown.
+                - paragraph [ref=e129]: Let's begin with the market research! I am calling the Brand Strategist now.✓ Brand Strategist complete. I received detailed insights on the 2026 wearable landscape, including the "orthosomnia" trend, competitive analysis (WHOOP, Oura, Apple Watch), target personas (Overwhelmed Professional, Mindful Athlete, Longevity Beginner), and key content pillars ("The Power of Less", "Breathable Biology", "AI Sleep Architect").
+                - paragraph [ref=e143]: Now moving to copywriting to create 3 Instagram posts based on these strategic insights. I am calling the Copywriter now.✓ Copywriting complete. I received 3 Instagram posts with hooks, captions, hashtags, CTAs, and visual suggestions targeting "The Power of Less", "Breathable Biology", and "AI Sleep Architect".
+                - paragraph [ref=e153]: Now moving to visual design to generate the visual concepts and real images for each post. I am calling the Designer now.
+      - generic [ref=e54]:
+        - textbox "Submit your campaign brief..." [ref=e56]
+        - button "Send message" [disabled] [ref=e58]
