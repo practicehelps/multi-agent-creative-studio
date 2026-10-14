@@ -17,9 +17,9 @@ GEMINI_VERSION_MODELS = {
     "3.5": "gemini-3.5-flash",
     "3.7": "gemini-3.7-flash",
     "3.8": "gemini-3.8-flash",
-    "4.0": "gemini-4.0-flash",
+    "4.0": "gemini-4-argon",
 }
-DEFAULT_GEMINI_MODEL = "gemini-4.0-flash"
+DEFAULT_GEMINI_MODEL = "gemini-4-argon"
 
 IMAGE_MIME_MAP = {
     "png": "image/png",
